@@ -7,11 +7,16 @@ import random
 def utility(board):
     return np.sum(board)
 
-def heuristic(state): 
-    i =  random.randint(0, 1)
-    poss = [-1, 1]
-    return poss[i]
+# Random heuristic
+# def heuristic(state): 
+    # i =  random.randint(0, 1)
+    # poss = [-1, 1]
+    # return poss[i]
 
+# pieces count 
+def heuristic(state):
+    return np.sum(state)
+    
 def action(state, coord, player):
     sucessor = state.copy()
 
