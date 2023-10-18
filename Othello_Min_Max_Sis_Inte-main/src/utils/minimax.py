@@ -18,13 +18,26 @@ def utility(board):
     # return np.sum(state)
 
 # corner priority
+# def heuristic(state): 
+    # value = 0
+    
+    # value += state[0][0] * 8
+    # value += state[0][7] * 8
+    # value += state[7][0] * 8
+    # value += state[7][7] * 8
+
+    # return value
+
+# border priority
 def heuristic(state): 
     value = 0
-    
-    value += state[0][0] * 8
-    value += state[0][7] * 8
-    value += state[7][0] * 8
-    value += state[7][7] * 8
+
+    for i in range(8):
+        value += state[0][i] * 2
+        value += state[7][i] * 2
+
+        value += state[i][0] * 2
+        value += state[i][7] * 2
 
     return value
     
