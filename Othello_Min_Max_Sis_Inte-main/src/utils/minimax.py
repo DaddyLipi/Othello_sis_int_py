@@ -14,8 +14,19 @@ def utility(board):
     # return poss[i]
 
 # pieces count 
-def heuristic(state):
-    return np.sum(state)
+# def heuristic(state):
+    # return np.sum(state)
+
+# corner priority
+def heuristic(state): 
+    value = 0
+    
+    value += state[0][0] * 8
+    value += state[0][7] * 8
+    value += state[7][0] * 8
+    value += state[7][7] * 8
+
+    return value
     
 def action(state, coord, player):
     sucessor = state.copy()
