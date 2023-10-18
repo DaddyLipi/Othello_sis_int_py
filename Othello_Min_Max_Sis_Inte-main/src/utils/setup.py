@@ -180,7 +180,7 @@ class Application:
             return
         
         possible_moves = self.game_board.all_legal_moves(self.turn)
-        print(possible_moves)
+        # print(possible_moves)
         if not possible_moves:
             self.shown_moves = False
             self.turn *= -1
@@ -224,7 +224,12 @@ class Application:
         '''Code to run when it is computer player's turn.'''
         
         # r, c = find_best_move(self.game_board)
-        r, c = min_max_alpha_beta_h(self.game_board, 'min', 3)
+
+        if(len(self.game_board.all_legal_moves(self.game_board.WHITE)) == 0): 
+            self.turn *= -1
+            return       
+
+        r, c = min_max_alpha_beta_h(self.game_board, 'min', 4)
         self.shown_moves = False
         
         if (r,c) == (20, 20):
