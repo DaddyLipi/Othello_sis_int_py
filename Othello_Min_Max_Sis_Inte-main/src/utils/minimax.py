@@ -29,17 +29,35 @@ def utility(board):
     # return value
 
 # border priority
+# def heuristic(state): 
+#     value = 0
+
+#     for i in range(8):
+#         value += state[0][i] * 2
+#         value += state[7][i] * 2
+
+#         value += state[i][0] * 2
+#         value += state[i][7] * 2
+
+#     return value
+
+# border-corner priority
 def heuristic(state): 
     value = 0
 
-    for i in range(8):
-        value += state[0][i] * 2
-        value += state[7][i] * 2
+    for i in range(1, 7):
+        value += state[1][i] * 2
+        value += state[6][i] * 2
 
-        value += state[i][0] * 2
-        value += state[i][7] * 2
+        value += state[i][1] * 2
+        value += state[i][6] * 2
 
+    value += state[0][0] * 4
+    value += state[0][7] * 4
+    value += state[7][0] * 4
+    value += state[7][7] * 4
     return value
+
     
 def action(state, coord, player):
     sucessor = state.copy()
