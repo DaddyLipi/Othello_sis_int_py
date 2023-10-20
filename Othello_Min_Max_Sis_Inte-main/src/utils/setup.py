@@ -231,9 +231,9 @@ class Application:
             self.turn *= -1
             return       
 
-        # r, c = min_max_alpha_beta_h(self.game_board, 'max', 4)
+        r, c = min_max_alpha_beta_h(self.game_board, 'max', 4)
         # r, c = min_max(self.game_board, 'max')
-        r, c = min_max_ab(self.game_board, 'max')
+        # r, c = min_max_ab(self.game_board, 'max')
         self.shown_moves = False
         
         if (r,c) == (20, 20):
@@ -257,6 +257,8 @@ class Application:
             return 
         
         # r, c = min_max_alpha_beta_h(self.game_board, 'max', 3)
+        print("juega la maquina")
+        print(self.turn)
         r, c = find_best_move(self.game_board)
         # r, c = min_max(self.game_board, 'max')
         self.shown_moves = False

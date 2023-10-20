@@ -77,7 +77,8 @@ def min_max_alpha_beta_h(state, player, limit):
         v = []
         actions = state.all_legal_moves(state.BLACK)
         actions = list(actions)
-        for a in actions: 
+        print(actions)
+        for a in actions.copy(): 
             sucessor = result(state.board, a, player)
             temp_board = Board()
             temp_board.board = sucessor
@@ -91,6 +92,7 @@ def min_max_alpha_beta_h(state, player, limit):
         v = []
         actions = state.all_legal_moves(state.WHITE)
         actions = list(actions)
+        print(actions)
         for a in actions.copy(): 
             sucessor = result(state.board, a, player)
             temp_board = Board()
@@ -109,7 +111,9 @@ def max_value_abh(state, alpha, beta, deep, limit):
     
     v = -1000000000
 
-    for a in state.all_legal_moves(state.BLACK):   
+    actions = list(state.all_legal_moves(state.BLACK))
+    random.shuffle(actions)
+    for a in actions.copy():   
         sucessor = result(state.board, a, 'max') 
         temp_board = Board()
         temp_board.board = sucessor
@@ -127,7 +131,9 @@ def min_value_abh(state, alpha, beta, deep, limit):
         return utility(state.board)
 
     v = 1000000000
-    for a in state.all_legal_moves(state.WHITE): 
+    actions = list(state.all_legal_moves(state.WHITE))
+    random.shuffle(actions)
+    for a in actions.copy(): 
         sucessor = result(state.board, a, 'min') 
         temp_board = Board()
         temp_board.board = sucessor
