@@ -225,11 +225,36 @@ class Application:
         
         # r, c = find_best_move(self.game_board)
 
-        if(len(self.game_board.all_legal_moves(self.game_board.WHITE)) == 0): 
+        if(len(self.game_board.all_legal_moves(self.game_board.BLACK)) == 0): 
             self.turn *= -1
             return       
 
-        r, c = min_max_alpha_beta_h(self.game_board, 'min', 4)
+        r, c = min_max_alpha_beta_h(self.game_board, 'max', 4)
+        self.shown_moves = False
+        
+        if (r,c) == (20, 20):
+            return
+        
+        self.last_move = (r, c)
+        self.game_board.set_discs(r, c, self.turn)
+        self.turn *= -1
+
+        # update board visuals
+        self.displayDiscs()
+        self.markLastMove()
+        self.displayScore()
+        
+    def betterComputerPlayerTurn(self) -> None:
+        '''Code to run when it is computer player's turn.'''
+        
+        # r, c = find_best_move(self.game_board)
+        if(len(self.game_board.all_legal_moves(self.game_board.WHITE)) == 0):
+            self.turn *= -1
+            return 
+        
+        # r, c = min_max_alpha_beta_h(self.game_board, 'max', 3)
+        r, c = find_best_move(self.game_board)
+        # r, c = min_max(self.game_board, 'max')
         self.shown_moves = False
         
         if (r,c) == (20, 20):
@@ -316,8 +341,11 @@ class Application:
 
             self.displayScore()
 
-            if self.single_player and self.turn == Board.WHITE:
+            if self.single_player and self.turn == Board.BLACK:
                 self.computerPlayerTurn()
+
+            if self.single_player and self.turn == Board.WHITE:
+                self.betterComputerPlayerTurn()
 
             self.displayLegalMoves()
 
