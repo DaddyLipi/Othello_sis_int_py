@@ -33,7 +33,8 @@ class Board:
     def checkCoordRange(x: int, y: int) -> bool:
         '''Returns true if the given parameters represent an actual cell in a 8x8 matrix'''
 
-        return (x >= 0 and y >= 0) and (x < 8 and y < 8)
+        # return (x >= 0 and y >= 0) and (x < 8 and y < 8)
+        return (x >= 2 and y >= 2) and (x < 6 and y < 6)
 
     def all_legal_moves(self, PLAYER: int) -> set:
         '''Return all legal moves for the player'''

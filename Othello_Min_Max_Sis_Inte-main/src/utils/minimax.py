@@ -137,6 +137,73 @@ def min_value_abh(state, alpha, beta, deep, limit):
         if(alpha >= beta): break 
 
     return v
+    
+
+def max_value(state): 
+
+    temp_board = Board()
+    temp_board.board = state
+    if(temp_board.check_game_over() is True): 
+        return utility(state)
+    
+    
+    v = -100000
+
+    if len(temp_board.all_legal_moves(1)) == 0: 
+        return min_value(state);  
+
+    for a in temp_board.all_legal_moves(1):   
+        sucessor = result(state, a, 'max') 
+        eval_min = min_value(sucessor) 
+        v  = max(v, eval_min)
+
+    return v
+
+def min_value(state):
+    temp_board = Board()
+    temp_board.board = state
+    if(temp_board.check_game_over() is True): 
+        return utility(state)
+
+    v = 1000000000
+    
+    if len(temp_board.all_legal_moves(-1)) == 0: 
+        return max_value(state);  
+    
+    for a in temp_board.all_legal_moves(-1):  
+        sucessor = result(state, a, 'min') 
+        eval_min = max_value(sucessor) 
+        v  = min(v, eval_min)
+
+    return v
+    
+
+
+def min_max(state, player):
+    if(player == "max"): 
+        v = []
+        actions = state.all_legal_moves(state.BLACK)
+        actions = list(actions)
+        for a in actions: 
+            sucessor = result(state.board, a, player)
+            val = min_value(sucessor)
+            v.append(val)
+        v = np.array(v)
+        index = np.argmax(v)
+        return actions[index]
+    elif player == 'min': 
+        v = []
+        actions = state.all_legal_moves(state.WHITE)
+        actions = list(actions)
+        for a in actions.copy(): 
+            sucessor = result(state, a, player)
+            val = max_value(sucessor)
+            v.append(val)
+        v = np.array(v)
+        index = np.argmin(v)
+        return actions[index]
+
+        # devolver accion asociada al menor valor del array v 
 
 def minimax(position: Board, depth: int, alpha: int, beta: int, isMaximizingPlayer: bool) -> int:
     if depth == 0 or position.check_game_over() is True:
