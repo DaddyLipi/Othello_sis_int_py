@@ -3,6 +3,7 @@ from utils.colors import Colors
 from utils.minimax import find_best_move
 from utils.minimax import min_max_alpha_beta_h
 from utils.minimax import min_max
+from utils.minimax import min_max_ab
 import pygame
 
 pygame.init()
@@ -231,7 +232,8 @@ class Application:
             return       
 
         # r, c = min_max_alpha_beta_h(self.game_board, 'max', 4)
-        r, c = min_max(self.game_board, 'max')
+        # r, c = min_max(self.game_board, 'max')
+        r, c = min_max_ab(self.game_board, 'max')
         self.shown_moves = False
         
         if (r,c) == (20, 20):
